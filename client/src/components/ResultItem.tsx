@@ -17,41 +17,10 @@ export const ResultItem: React.FC<IResultItem> = ({
   t,
   text,
 }) => {
-  // const [images] = React.useState<string[]>([
-  //   `https://i.ytimg.com/vi/${v}/maxresdefault.jpg`,
-  //   `https://i.ytimg.com/vi/${v}/sddefault.jpg`,
-  //   `https://i.ytimg.com/vi/${v}/hqdefault.jpg`,
-  //   `/assets/emam.jpeg`,
-  // ]);
-  const [
-    src,
-    // setSrc
-  ] = React.useState<string>(
-    `https://i.ytimg.com/vi/${v}/hqdefault.jpg`
-    //images[0]
-  );
-  // const [index, setIndex] = React.useState<number>(0);
-  // const ref = React.createRef<HTMLImageElement>();
-
-  // React.useEffect(() => {
-  //   if(ref.current) {
-  //     ref.current.onerror = () => {
-  //       console.log("onerror");
-  //       setIndex((index) => {
-  //         // if (index + 1 === 3) {
-  //         //   console.log("onerror = null");
-  //         //   ref.current.onerror = null;
-  //         // }
-  //         setSrc(images[index]);
-  //         return index + 1;
-  //       });
-  //     }
-  //   }
-  // }, [])
-
   return (
     <a
       className="w-full flex p-2 items-center flex-col sm:flex-row"
+      rel="noreferrer"
       href={`https://youtube.com/watch?v=${v}&lc=${lc}${
         list ? `&list=${list}&index=${index}` : ``
       }&t=${t}`}
@@ -59,9 +28,13 @@ export const ResultItem: React.FC<IResultItem> = ({
     >
       <div className="w-full sm:w-2/12 mr-1">
         <img
-          src={src}
-          // ref={ref}
+          src={`https://i.ytimg.com/vi/${v}/hqdefault.jpg`}
+          onError={(e) => {
+            e.currentTarget.src = `/assets/emam.jpeg`;
+            e.currentTarget.onerror = null;
+          }}
           alt={"Video Cover"}
+          
           className={"object-cover aspect-video"}
         />
       </div>
