@@ -1,25 +1,27 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "EMAM Search",
+  "short_name": "EMAM Search",
+  "start_url": "https://localhost:3014",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#fff",
+  "theme_color": "#4285f4",
   "icons": [
     {
       "src": "assets/emam.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "256x256",
       "type": "image/x-icon"
     },
     {
       "src": "assets/emam.jpeg",
       "type": "image/jpeg",
-      "sizes": "192x192"
+      "sizes": "800x800"
     },
     {
       "src": "assets/emam-blue.jpeg",
       "type": "image/jpeg",
-      "sizes": "512x512"
+      "sizes": "800x800"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "splash_pages": null
 }
