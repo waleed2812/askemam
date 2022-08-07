@@ -99,7 +99,7 @@ function Home() {
               .filter(filterByExact)
               .map(
                 (item: any, index: number) =>
-                  index < 5 && <ResultItem item={item} key={index} />
+                  <ResultItem {...item} key={index} />
               )}
           </>
         ) : (

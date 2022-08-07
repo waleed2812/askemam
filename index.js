@@ -54,8 +54,18 @@ app.use(
 );
 /* ----------------------------------- CSP ---------------------------------- */
 const client = "client";
+const CSP = require(`./${client}/csp.js`)[global.config.NODE_ENV];
+  // console.log(CSP);
 const helmet = require("helmet");
-app.use(helmet());
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: CSP["default-src"],
+      imgSrc: CSP["img-src"],
+    },
+  },
+}));
 /* ------------------------------- Web Routes ------------------------------- */
 // React App
 app.use(express.static(path.join(__dirname, client + "/build")));
