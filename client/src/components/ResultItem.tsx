@@ -18,15 +18,15 @@ export const ResultItem: React.FC<IResultItem> = ({
   text,
 }) => {
   return (
-    <a
-      className="w-full flex p-2 items-center flex-col sm:flex-row"
-      rel="noreferrer"
-      href={`https://youtube.com/watch?v=${v}&lc=${lc}${
-        list ? `&list=${list}&index=${index}` : ``
-      }&t=${t}`}
-      target="_blank"
-    >
-      <div className="w-full sm:w-2/12 mr-1">
+    <div className="w-full flex p-2 items-center flex-col sm:flex-row mb-2">
+      <a
+        rel="noreferrer"
+        href={`https://youtube.com/watch?v=${v}&lc=${lc}${
+          list ? `&list=${list}&index=${index}` : ``
+        }&t=${t}`}
+        target="_blank"
+        className="w-full sm:w-2/12 mr-1 cursor-pointer "
+      >
         <img
           src={`https://i.ytimg.com/vi/${v}/hqdefault.jpg`}
           onError={(e) => {
@@ -34,14 +34,13 @@ export const ResultItem: React.FC<IResultItem> = ({
             e.currentTarget.onerror = null;
           }}
           alt={"Video Cover"}
-          
           className={"object-cover aspect-video"}
         />
-      </div>
+      </a>
       <div className="w-full sm:w-10/12 ml-1">
         <p>{text}</p>
       </div>
-    </a>
+    </div>
   );
 };
 
