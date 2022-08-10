@@ -7,14 +7,10 @@ function Home() {
   const [isSearching, setSearching] = React.useState<boolean>(false);
   const [search, setSearch] = React.useState<string>();
   const [timestamps, setTimestamps] = React.useState<any[]>([]);
+  const [limit, setLimit] = React.useState<number>(10);
   const [searchedTimestamps, setSearchedTimestamps] = React.useState<any[]>([]);
   const EXCLUDED_SERIES: string[] = ["nqc", "qc", "eqc", "critical"];
-  const EXCLUDED_WORDS_EXACT: string[] = [
-    "introduction",
-    "intro",
-    "introduction and instructions",
-    "khutbah aur durood",
-  ];
+  const EXCLUDED_WORDS_EXACT: string[] = ["introduction", "intro"];
 
   const updateTimestamps = async () => {
     try {
@@ -36,7 +32,10 @@ function Home() {
                       .join("")
                   ) &&
                   !item?.text?.toLowerCase()?.includes("start") &&
-                  !item?.text?.toLowerCase()?.includes("introduction and instructions")
+                  !item?.text?.toLowerCase()?.includes("khutbah aur durood") &&
+                  !item?.text
+                    ?.toLowerCase()
+                    ?.includes("introduction and instructions")
               )
               .map((item: any) => ({
                 ...item,
@@ -54,9 +53,7 @@ function Home() {
       Object.keys(emam)
         .filter((series) => !EXCLUDED_SERIES.includes(series))
         .forEach((series: string) => {
-          const values = Object.values(emam[series]).filter(
-            (item) => typeof item !== "string"
-          );
+          const values: any[] = emam[series]?.lectures;
           const list: string = emam[series]?.list;
           // console.log("values[0]", values[0]);
           values.forEach((value) => convertTimestamp(value, list));
@@ -163,9 +160,21 @@ function Home() {
         {search && search.length > 1 ? (
           <>
             {searchedTimestamps.length > 0 ? (
-              searchedTimestamps.map((item: any, index: number) => (
-                <ResultItem {...item} key={index} />
-              ))
+              <>
+                {searchedTimestamps.map((item: any, index: number) =>
+                  index < limit ? <ResultItem {...item} key={index} /> : null
+                )}
+                {searchedTimestamps.length > limit ? (
+                  <div className="w-full flex items-center justify-center">
+                    <button
+                      onClick={() => setLimit(limit + 10)}
+                      className="bg-blue-500 rounded-lg py-2 px-4 text-white mb-2"
+                    >
+                      Load More
+                    </button>
+                  </div>
+                ) : null}
+              </>
             ) : (
               <div className="w-full">
                 <p className="w-full text-center">no records.</p>
