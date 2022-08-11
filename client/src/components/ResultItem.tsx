@@ -18,7 +18,7 @@ export const ResultItem: React.FC<IResultItem> = ({
   text,
 }) => {
   return (
-    <div className="w-full flex p-2 items-center flex-col sm:flex-row mb-2">
+    <div className="w-full flex p-2 flex-col sm:flex-row mb-2">
       <a
         rel="noreferrer"
         href={`https://youtube.com/watch?v=${v}&lc=${lc}${
@@ -37,8 +37,8 @@ export const ResultItem: React.FC<IResultItem> = ({
           className={"object-cover aspect-video"}
         />
       </a>
-      <div className="w-full sm:w-10/12 ml-1">
-        <p>{text}</p>
+      <div className="w-full sm:w-10/12 ml-1 h-full">
+        <p className="text-sm">{text}</p>
       </div>
     </div>
   );

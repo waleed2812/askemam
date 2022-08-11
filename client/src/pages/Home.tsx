@@ -9,58 +9,13 @@ function Home() {
   const [timestamps, setTimestamps] = React.useState<any[]>([]);
   const [limit, setLimit] = React.useState<number>(10);
   const [searchedTimestamps, setSearchedTimestamps] = React.useState<any[]>([]);
-  const EXCLUDED_SERIES: string[] = ["nqc", "qc", "eqc", "critical"];
-  const EXCLUDED_WORDS_EXACT: string[] = ["introduction", "intro"];
 
   const updateTimestamps = async () => {
     try {
       const emam: any = require("../json/emam.min.json");
-      let final: any[] = [];
-      const convertTimestamp = (value: any, list?: string) => {
-        const key = value.questions ? "questions" : "topics";
-        if (value[key]) {
-          final.push(
-            ...value[key]
-              .filter(
-                (item: any) =>
-                  !EXCLUDED_WORDS_EXACT.includes(
-                    item.text
-                      ?.toLowerCase()
-                      .split(/[^a-z]/)
-                      .join("")
-                      .split(" ")
-                      .join("")
-                  ) &&
-                  !item?.text?.toLowerCase()?.includes("start") &&
-                  !item?.text?.toLowerCase()?.includes("khutbah aur durood") &&
-                  !item?.text
-                    ?.toLowerCase()
-                    ?.includes("introduction and instructions")
-              )
-              .map((item: any) => ({
-                ...item,
-                v: value.v,
-                lc: value.lc,
-                index: value.index,
-                list: list,
-                _id: Math.random() + Date.now() + "",
-              }))
-          );
-        }
-        // console.log(final[0]);
-      };
-      emam?.critical?.forEach((value: any) => convertTimestamp(value));
-      Object.keys(emam)
-        .filter((series) => !EXCLUDED_SERIES.includes(series))
-        .forEach((series: string) => {
-          const values: any[] = emam[series]?.lectures;
-          const list: string = emam[series]?.list;
-          // console.log("values[0]", values[0]);
-          values.forEach((value) => convertTimestamp(value, list));
-        });
-      // console.log(final);
-      // console.log(final[0]);
-      setTimestamps(final);
+      if (emam) {
+        setTimestamps(emam);
+      }
     } catch (err: any) {
       console.error(err);
     }
@@ -68,28 +23,34 @@ function Home() {
 
   const filterMultipleWords = () => {
     const params = search
-      ?.toLowerCase()
-      .split(/[^a-z]/)
+      ?.split(/[^a-z]/)
       .join(" ")
       .split(" ")
-      .filter((i) => i.length > 1);
+      .filter(item => item);
     if (!params || params?.length < 2) return;
-    // console.log("params", params);
-    let filteredTimestamps = timestamps;
+    console.log("params", params);
+    let filteredTimestamps = [...timestamps];
     params.forEach((param) => {
-      filteredTimestamps = filteredTimestamps.filter((value) =>
-        value?.text?.toLowerCase().includes(param)
-      );
+      filteredTimestamps = filteredTimestamps
+        .filter((value) =>
+          value?.text?.toLowerCase().includes(param.toLowerCase())
+        )
+        .map((value) => ({
+          ...value,
+          text: value?.text?.replace(new RegExp(param, "i"), ""),
+        }));
     });
-
     if (filteredTimestamps.length > 1) {
-      setSearchedTimestamps((prevState) => [
-        ...prevState,
-        ...filteredTimestamps.filter(
+      setSearchedTimestamps((prevState: any[]) => {
+        filteredTimestamps = filteredTimestamps.filter(
           (value) =>
             prevState.findIndex((item) => item._id === value._id) === -1
-        ),
-      ]);
+        );
+        return timestamps.filter(
+          (value) =>
+            filteredTimestamps.findIndex((item) => item._id === value._id) !== -1
+        );
+      });
     }
   };
 
@@ -113,10 +74,12 @@ function Home() {
 
   React.useEffect(() => {
     updateTimestamps();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
     startSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   return (
