@@ -12,7 +12,7 @@ function Home() {
 
   const updateTimestamps = async () => {
     try {
-      const emam: any = require("../json/emam.min.json");
+      const emam: any = require("../json/search.min.json");
       if (emam) {
         setTimestamps(emam);
       }
