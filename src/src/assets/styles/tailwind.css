@@ -669,6 +669,23 @@ html {
   height: 33.333333%;
 }
 
+.h-0 {
+  height: 0px;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-max {
+  height: -webkit-max-content;
+  height: max-content;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
 .w-full {
   width: 100%;
 }
@@ -764,6 +781,11 @@ html {
 
 .border-transparent {
   border-color: transparent;
+}
+
+.border-secondary {
+  --tw-border-opacity: 1;
+  border-color: rgb(33 33 33 / var(--tw-border-opacity));
 }
 
 .bg-secondary {
@@ -913,6 +935,10 @@ html {
 
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @font-face {

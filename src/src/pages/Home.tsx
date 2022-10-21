@@ -23,9 +23,9 @@ function Home() {
 
         const len = params?.length;
         if (!params || len < 2) return false;
-        for(let i = 0 ; i< params.length; i++) {
+        for (let i = 0; i < params.length; i++) {
           const param = params[0];
-          if(from?.includes(param)) {
+          if (from?.includes(param)) {
             from = from?.replace(param, "");
           } else {
             return false;
@@ -37,19 +37,19 @@ function Home() {
   );
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center min-h-screen	">
       {/* Header */}
       <div
         className={`w-full mb-2 ${
-          focus || search ? "h-1/6" : `h-2/3vh bg-banner-01 bg-cover	 pb-5`
-        } flex flex-col items-center justify-end transition-all duration-300`}
+          focus || search ? "h-1/6" : `h-2/3vh bg-banner-01 bg-cover pb-5`
+        } flex flex-col items-center justify-end`}
       >
         {/* Title */}
 
         <div
           className={`w-full ${
             focus || search ? "hidden" : ""
-          } flex flex-col items-center justify-center transition-all duration-300 mb-3 container`}
+          } flex flex-col items-center justify-center mb-3 container`}
         >
           <h1 className="text-white text-5xl mb-5 font-helvetica">AskEMAM</h1>
           <p className="text-white text-2xl text-center">
@@ -67,6 +67,8 @@ function Home() {
               ? darkMode
                 ? "border-white"
                 : "border-black"
+              : search
+              ? "border-secondary"
               : "border-transparent"
           }`}
         >
