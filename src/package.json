@@ -22,8 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-csp development && react-scripts build && react-csp local",
-    "build:prod": "react-csp production && react-scripts build && react-csp local",
+    "build": "react-csp production && react-scripts build && react-csp development",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "watch:css": "npx tailwindcss -i ./src/assets/styles/index.css -o ./src/assets/styles/tailwind.css --watch"

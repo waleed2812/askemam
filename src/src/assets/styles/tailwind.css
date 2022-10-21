@@ -927,11 +927,6 @@ html {
   src: url("../fonts/Montserrat-VariableFont_wght.ttf") format("");
 }
 
-html, body, #root {
-  width: 100%;
-  height: 100%;
-}
-
 .focus\:outline-0:focus {
   outline-width: 0px;
 }

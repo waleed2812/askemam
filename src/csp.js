@@ -1,4 +1,4 @@
-const LOCAL_COMMON = ["ws:", "http://localhost:3010"];
+const LOCAL_COMMON = ["ws:"];
 
 const CSP_COMMON = ["'self'", "'unsafe-inline'", "'unsafe-eval'"];
 
@@ -13,13 +13,9 @@ const IMG_SRC = [
 ];
 
 module.exports = {
-  local: {
+  development: {
     "default-src": [...CSP_DEFAULTS, ...LOCAL_COMMON],
     "img-src": [...IMG_SRC, ...LOCAL_COMMON],
-  },
-  development: {
-    "default-src": CSP_DEFAULTS,
-    "img-src": IMG_SRC,
   },
   production: {
     "default-src": CSP_DEFAULTS,

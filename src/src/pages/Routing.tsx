@@ -9,7 +9,7 @@ export const Routing: React.FC<{}> = () => {
     <BrowserRouter>
       <Navbar />
       <div
-        className={`mt-20 w-full h-full ${
+        className={`mt-20 ${
           darkMode ? "bg-black text-white" : "bg-white text-black"
         }`}
       >
