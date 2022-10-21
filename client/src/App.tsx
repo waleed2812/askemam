@@ -1,9 +1,8 @@
-import "./assets/styles/tailwind.css";
-import "react-toastify/dist/ReactToastify.css";
-import { Provider } from "react-redux";
-import { store } from "./redux";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./assets/styles/tailwind.css";
 import { TOAST_OPTIONS } from "./config";
+import { ContextControllerProvider } from "./context";
 import Routing from "./pages/Routing";
 
 if (process.env.NODE_ENV === "production") {
@@ -14,10 +13,10 @@ if (process.env.NODE_ENV === "production") {
 
 export const App = () => {
   return (
-    <Provider store={store}>
+    <ContextControllerProvider>
       <Routing />
-      <ToastContainer {...TOAST_OPTIONS}/>
-    </Provider>
+      <ToastContainer {...TOAST_OPTIONS} />
+    </ContextControllerProvider>
   );
 };
 

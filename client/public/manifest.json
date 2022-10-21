@@ -1,11 +1,11 @@
 {
-  "name": "EMAM Search",
-  "short_name": "EMAM Search",
-  "start_url": "https://localhost:3014",
-  "display": "standalone",
+  "name": "AskEMAM",
+  "short_name": "AskEMAM",
+  "start_url": ".",
+  "display": "minimal-ui",
   "orientation": "landscape",
-  "background_color": "#fff",
-  "theme_color": "#4285f4",
+  "background_color": "#000000",
+  "theme_color": "#3688E5",
   "icons": [
     {
       "src": "assets/emam.ico",

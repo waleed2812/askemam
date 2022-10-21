@@ -1,104 +1,56 @@
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { Loader, ResultItem } from "../components";
+import { ResultItem } from "../components";
+import timestamps from "../json/search.min.json";
 
 function Home() {
   const [focus, setFocus] = React.useState<boolean>(false);
-  const [isSearching, setSearching] = React.useState<boolean>(false);
-  const [search, setSearch] = React.useState<string>();
-  const [timestamps, setTimestamps] = React.useState<any[]>([]);
+  const [search, setSearch] = React.useState<string>("");
   const [limit, setLimit] = React.useState<number>(10);
-  const [searchedTimestamps, setSearchedTimestamps] = React.useState<any[]>([]);
+  const searchedTimestamps = React.useMemo(
+    () =>
+      timestamps.filter((item) => {
+        const from = item.text?.toLowerCase();
+        const query = search?.toLowerCase();
+        if (from?.includes(query)) return true;
+        const params = query
+          ?.split(/[^a-z]/)
+          .join(" ")
+          .split(" ")
+          .filter((item) => item);
 
-  const updateTimestamps = async () => {
-    try {
-      const emam: any = require("../json/search.min.json");
-      if (emam) {
-        setTimestamps(emam);
-      }
-    } catch (err: any) {
-      console.error(err);
-    }
-  };
-
-  const filterMultipleWords = () => {
-    const params = search
-      ?.split(/[^a-z]/)
-      .join(" ")
-      .split(" ")
-      .filter(item => item);
-    if (!params || params?.length < 2) return;
-    console.log("params", params);
-    let filteredTimestamps = [...timestamps];
-    params.forEach((param) => {
-      filteredTimestamps = filteredTimestamps
-        .filter((value) =>
-          value?.text?.toLowerCase().includes(param.toLowerCase())
-        )
-        .map((value) => ({
-          ...value,
-          text: value?.text?.replace(new RegExp(param, "i"), ""),
-        }));
-    });
-    if (filteredTimestamps.length > 1) {
-      setSearchedTimestamps((prevState: any[]) => {
-        filteredTimestamps = filteredTimestamps.filter(
-          (value) =>
-            prevState.findIndex((item) => item._id === value._id) === -1
-        );
-        return timestamps.filter(
-          (value) =>
-            filteredTimestamps.findIndex((item) => item._id === value._id) !== -1
-        );
-      });
-    }
-  };
-
-  const filterByExact = () => {
-    timestamps.forEach((value) => {
-      if (value?.text?.toLowerCase().includes(search?.toLowerCase())) {
-        setSearchedTimestamps((prevState) => [...prevState, value]);
-      }
-    });
-  };
-
-  const startSearch = () => {
-    setSearchedTimestamps([]);
-    if (search && search.length > 1) {
-      setSearching(true);
-      filterByExact();
-      filterMultipleWords();
-      setSearching(false);
-    }
-  };
-
-  React.useEffect(() => {
-    updateTimestamps();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  React.useEffect(() => {
-    startSearch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+        if (!params || params?.length < 2) return false;
+        return !!params.find((param) => from?.includes(param));
+      }),
+    [search, timestamps]
+  );
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="flex flex-col items-center">
+      {/* Header */}
       <div
         className={`w-full mb-2 ${
-          focus || search ? "h-1/6" : "h-1/2"
+          focus || search ? "h-1/6" : `h-2/3vh bg-banner-01 bg-cover	 pb-5`
         } flex flex-col items-center justify-end transition-all duration-300`}
       >
+        {/* Title */}
+
         <div
           className={`w-full ${
-            focus || search ? "h-0 hidden" : "h-max"
-          } flex items-center justify-center transition-all duration-300`}
+            focus || search ? "hidden" : ""
+          } flex flex-col items-center justify-center transition-all duration-300 mb-3 container`}
         >
-          <p>Search Through Engineer Muhammad Ali Mirza's Lectures</p>
+          <h1 className="text-white text-5xl mb-5 font-helvetica">AskEMAM</h1>
+          <p className="text-white text-2xl text-center">
+            Search Questions from Engineer Muhammad Ali Mirza(EMAM)'s Lectures.
+          </p>
         </div>
+
+        {/* Search Input */}
+
         <div
-          className={`flex w-8/12 items-center rounded-3xl shadow-xl drop-shadow-xl px-2 border-2 ${
-            focus ? "border-blue-500" : "border-transparent"
+          className={`container overflow-hidden bg-white mt-2 flex w-8/12 items-center rounded-3xl shadow-xl drop-shadow-xl px-2 border-2 ${
+            focus ? "border-black" : "border-transparent"
           }`}
         >
           <div className="w-1/12 flex items-center justify-center">
@@ -115,45 +67,34 @@ function Home() {
           </div>
         </div>
       </div>
+      {/* Search Results */}
       <div
-        className={`w-full ${
-          focus || search ? "h-full" : "h-0 hidden"
-        } overflow-x-hidden transition-all duration-300`}
+        className={`container w-full ${
+          focus || search ? "h-full" : "h-1/3"
+        } transition-all duration-300`}
       >
-        {search && search.length > 1 ? (
+        {searchedTimestamps.length > 0 ? (
           <>
-            {searchedTimestamps.length > 0 ? (
-              <>
-                {searchedTimestamps.map((item: any, index: number) =>
-                  index < limit ? <ResultItem {...item} key={index} /> : null
-                )}
-                {searchedTimestamps.length > limit ? (
-                  <div className="w-full flex items-center justify-center">
-                    <button
-                      onClick={() => setLimit(limit + 10)}
-                      className="bg-blue-500 rounded-lg py-2 px-4 text-white mb-2"
-                    >
-                      Load More
-                    </button>
-                  </div>
-                ) : null}
-              </>
-            ) : (
-              <div className="w-full">
-                <p className="w-full text-center">no records.</p>
-              </div>
+            {!focus && !search ? (
+              <h3 className="text-2xl p-2 ">Most Recent Questions</h3>
+            ) : null}
+            {searchedTimestamps.map((item: any, index: number) =>
+              index < limit ? <ResultItem {...item} key={index} /> : null
             )}
-            {isSearching ? (
-              <div className="w-full flex items-center justify-center py-2">
-                <Loader />
+            {searchedTimestamps.length > limit ? (
+              <div className="w-full flex items-center justify-center">
+                <button
+                  onClick={() => setLimit(limit + 10)}
+                  className="bg-blue-500 rounded-lg py-2 px-4 text-white mb-2"
+                >
+                  Load More
+                </button>
               </div>
             ) : null}
           </>
         ) : (
           <div className="w-full">
-            <p className="w-full text-center">
-              enter at least two characters to search.
-            </p>
+            <p className="w-full text-center text-error text-xl">No Records.</p>
           </div>
         )}
       </div>

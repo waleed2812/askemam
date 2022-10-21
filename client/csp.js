@@ -2,7 +2,7 @@ const LOCAL_COMMON = ["ws:", "http://localhost:3010"];
 
 const CSP_COMMON = ["'self'", "'unsafe-inline'", "'unsafe-eval'"];
 
-const CSP_DEFAULTS = [...CSP_COMMON, "blob:"];
+const CSP_DEFAULTS = [...CSP_COMMON, "blob:", "https://fonts.googleapis.com"];
 
 const IMG_SRC = [
   ...CSP_COMMON,
