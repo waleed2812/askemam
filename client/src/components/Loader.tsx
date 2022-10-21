@@ -5,7 +5,7 @@ interface ILoader {
   className?: string;
 }
 
-export const Loader: React.FC<ILoader> = ({ className = "text-blue-500" }) => {
+export const Loader: React.FC<ILoader> = ({ className = "text-primary" }) => {
   return <BiLoaderAlt className={"animate-spin ml-1 " + className}/>;
 };
 

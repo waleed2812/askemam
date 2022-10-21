@@ -22,9 +22,13 @@ function reducer(state: any, action: any) {
 // Context context provider
 export const ContextControllerProvider: React.FC<any> = (props: any) => {
   const { children } = props;
-  const user_data = localStorage.getItem("user_data");
+  let darkMode = localStorage.getItem("DARK_MODE");
+  if (!darkMode) {
+    const res = window.matchMedia("(prefers-color-scheme: dark)").media;
+    darkMode = res.includes("dark") + "";
+  }
   const initialState = {
-    darkMode: localStorage.getItem("DARK_MODE") === "true",
+    darkMode: darkMode === "true",
   };
 
   const [controller, dispatch] = useReducer(reducer, initialState);
@@ -39,7 +43,9 @@ export const useContextController = () => {
   const context = useContext(MyContext);
 
   if (!context) {
-    throw new Error("useContextController should be used inside the ContextControllerProvider.");
+    throw new Error(
+      "useContextController should be used inside the ContextControllerProvider."
+    );
   }
 
   return context;

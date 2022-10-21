@@ -1,9 +1,11 @@
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { ResultItem } from "../components";
+import { useContextController } from "../context";
 import timestamps from "../json/search.min.json";
 
 function Home() {
+  const [{ darkMode }] = useContextController();
   const [focus, setFocus] = React.useState<boolean>(false);
   const [search, setSearch] = React.useState<string>("");
   const [limit, setLimit] = React.useState<number>(10);
@@ -49,8 +51,14 @@ function Home() {
         {/* Search Input */}
 
         <div
-          className={`container overflow-hidden bg-white mt-2 flex w-8/12 items-center rounded-3xl shadow-xl drop-shadow-xl px-2 border-2 ${
-            focus ? "border-black" : "border-transparent"
+          className={`max-w-xl overflow-hidden ${
+            darkMode ? "bg-black text-white" : "bg-white text-black"
+          } mt-2 flex w-8/12 items-center rounded-3xl shadow-xl drop-shadow-xl px-2 border-2 ${
+            focus
+              ? darkMode
+                ? "border-white"
+                : "border-black"
+              : "border-transparent"
           }`}
         >
           <div className="w-1/12 flex items-center justify-center">
@@ -85,7 +93,7 @@ function Home() {
               <div className="w-full flex items-center justify-center">
                 <button
                   onClick={() => setLimit(limit + 10)}
-                  className="bg-blue-500 rounded-lg py-2 px-4 text-white mb-2"
+                  className="bg-primary rounded-lg py-2 px-4 text-white mb-2"
                 >
                   Load More
                 </button>
