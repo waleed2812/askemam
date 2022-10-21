@@ -12,7 +12,7 @@ function Home() {
   const searchedTimestamps = React.useMemo(
     () =>
       timestamps.filter((item) => {
-        const from = item.text?.toLowerCase();
+        let from = item.text?.toLowerCase();
         const query = search?.toLowerCase();
         if (from?.includes(query)) return true;
         const params = query
@@ -21,8 +21,17 @@ function Home() {
           .split(" ")
           .filter((item) => item);
 
-        if (!params || params?.length < 2) return false;
-        return !!params.find((param) => from?.includes(param));
+        const len = params?.length;
+        if (!params || len < 2) return false;
+        for(let i = 0 ; i< params.length; i++) {
+          const param = params[0];
+          if(from?.includes(param)) {
+            from = from?.replace(param, "");
+          } else {
+            return false;
+          }
+        }
+        return true;
       }),
     [search, timestamps]
   );

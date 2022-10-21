@@ -601,11 +601,6 @@ html {
   position: absolute;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-}
-
 .top-0 {
   top: 0px;
 }
@@ -654,6 +649,10 @@ html {
   aspect-ratio: 16 / 9;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -670,31 +669,6 @@ html {
   height: 33.333333%;
 }
 
-.h-56 {
-  height: 14rem;
-}
-
-.h-max {
-  height: -webkit-max-content;
-  height: max-content;
-}
-
-.h-44 {
-  height: 11rem;
-}
-
-.h-28 {
-  height: 7rem;
-}
-
-.h-10 {
-  height: 2.5rem;
-}
-
-.h-20 {
-  height: 5rem;
-}
-
 .w-full {
   width: 100%;
 }
@@ -709,22 +683,6 @@ html {
 
 .w-11\/12 {
   width: 91.666667%;
-}
-
-.max-w-xs {
-  max-width: 20rem;
-}
-
-.max-w-sm {
-  max-width: 24rem;
-}
-
-.max-w-md {
-  max-width: 28rem;
-}
-
-.max-w-lg {
-  max-width: 32rem;
 }
 
 .max-w-xl {
@@ -794,6 +752,11 @@ html {
   border-width: 0px;
 }
 
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(221 221 221 / var(--tw-border-opacity));
+}
+
 .border-black {
   --tw-border-opacity: 1;
   border-color: rgb(2 13 27 / var(--tw-border-opacity));
@@ -803,9 +766,14 @@ html {
   border-color: transparent;
 }
 
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(221 221 221 / var(--tw-border-opacity));
+.bg-secondary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(33 33 33 / var(--tw-bg-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 13 27 / var(--tw-bg-opacity));
 }
 
 .bg-white {
@@ -817,29 +785,9 @@ html {
   background-color: transparent;
 }
 
-.bg-blue-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-
-.bg-secondary {
-  --tw-bg-opacity: 1;
-  background-color: rgb(33 33 33 / var(--tw-bg-opacity));
-}
-
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(54 136 229 / var(--tw-bg-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(2 13 27 / var(--tw-bg-opacity));
 }
 
 .bg-banner-01 {
@@ -863,6 +811,11 @@ html {
   padding-right: 0.5rem;
 }
 
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -878,11 +831,6 @@ html {
   padding-right: 1rem;
 }
 
-.py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-}
-
 .pb-5 {
   padding-bottom: 1.25rem;
 }
@@ -895,6 +843,11 @@ html {
   font-family: Helvetica;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -903,11 +856,6 @@ html {
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .text-xl {
@@ -920,9 +868,9 @@ html {
   line-height: 1.75rem;
 }
 
-.text-blue-500 {
+.text-primary {
   --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
+  color: rgb(54 136 229 / var(--tw-text-opacity));
 }
 
 .text-white {
@@ -930,19 +878,14 @@ html {
   color: rgb(221 221 221 / var(--tw-text-opacity));
 }
 
-.text-error {
-  --tw-text-opacity: 1;
-  color: rgb(245 27 1 / var(--tw-text-opacity));
-}
-
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(2 13 27 / var(--tw-text-opacity));
 }
 
-.text-primary {
+.text-error {
   --tw-text-opacity: 1;
-  color: rgb(54 136 229 / var(--tw-text-opacity));
+  color: rgb(245 27 1 / var(--tw-text-opacity));
 }
 
 .shadow-xl {
@@ -982,6 +925,11 @@ html {
   font-family: "Montserrat";
 
   src: url("../fonts/Montserrat-VariableFont_wght.ttf") format("");
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
 }
 
 .focus\:outline-0:focus {
