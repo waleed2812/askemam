@@ -4,7 +4,7 @@ export const TOAST_OPTIONS: ToastContainerProps = {
   position: "bottom-left",
   autoClose: 2000,
   progressStyle: {
-    background: "#1E0338",
+    background: "#3688E5",
   },
   style: {
     display: "flex",
