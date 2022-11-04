@@ -2,7 +2,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./assets/styles/tailwind.css";
 import { TOAST_OPTIONS } from "./config";
-import { ContextControllerProvider } from "./context";
+import { ContextProvider } from "./context";
 import Routing from "./pages/Routing";
 
 if (process.env.NODE_ENV === "production") {
@@ -13,10 +13,10 @@ if (process.env.NODE_ENV === "production") {
 
 export const App = () => {
   return (
-    <ContextControllerProvider>
+    <ContextProvider>
       <Routing />
       <ToastContainer {...TOAST_OPTIONS} />
-    </ContextControllerProvider>
+    </ContextProvider>
   );
 };
 
