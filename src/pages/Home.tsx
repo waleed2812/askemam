@@ -3,6 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { ResultItem } from "../components";
 import { useContextController } from "../context";
 import timestamps from "../json/search.min.json";
+import { formatText } from "../utils/reformers";
 
 function Home() {
   const [{ darkMode }] = useContextController();
@@ -10,20 +11,20 @@ function Home() {
   const [search, setSearch] = React.useState<string>("");
   const [limit, setLimit] = React.useState<number>(10);
   const searchedTimestamps = React.useMemo(
-    () =>
-      timestamps.filter((item) => {
-        let from = item.text?.toLowerCase();
-        const query = search?.toLowerCase();
+    () => [
+      ...timestamps.filter((item) => {
+        let from = formatText(item.text);
+        const query = formatText(search);
         if (from?.includes(query)) return true;
-        const params = query
-          ?.split(/[^a-z]/)
-          .join(" ")
-          .split(" ")
-          .filter((item) => item);
-
+        return false;
+      }),
+      ...timestamps.filter((item) => {
+        let from = formatText(item.text);
+        const query = formatText(search);
+        const params = query?.split(" ").filter((item) => item);
         const len = params?.length;
         if (!params || len < 2) return false;
-        for (let i = 0; i < params.length; i++) {
+        for (let i = 0; i < len; i++) {
           const param = params[0];
           if (from?.includes(param)) {
             from = from?.replace(param, "");
@@ -33,6 +34,7 @@ function Home() {
         }
         return true;
       }),
+    ],
     [search, timestamps]
   );
 
@@ -41,8 +43,8 @@ function Home() {
       {/* Header */}
       <div
         className={`w-full mb-2 ${
-          focus || search ? "h-1/6" : `h-2/3vh bg-banner-01 bg-cover pb-5`
-        } flex flex-col items-center justify-end`}
+          focus || search ? "h-1/6" : `h-2/3vh bg-banner bg-cover bg-center pb-5`
+        } flex flex-col items-center justify-end px-4 sm:px-0 `}
       >
         {/* Title */}
 
@@ -60,16 +62,16 @@ function Home() {
         {/* Search Input */}
 
         <div
-          className={`max-w-xl overflow-hidden ${
+          className={`px-2 max-w-md sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl w-full overflow-hidden ${
             darkMode ? "bg-black text-white" : "bg-white text-black"
-          } mt-2 flex w-8/12 items-center rounded-3xl shadow-xl drop-shadow-xl px-2 border-2 ${
+          } mt-2 flex items-center rounded-3xl shadow-xl drop-shadow-xl border-2 ${
             focus
               ? darkMode
-                ? "border-white"
-                : "border-black"
+                ? "border-white w-full"
+                : "border-black w-8/12"
               : search
-              ? "border-secondary"
-              : "border-transparent"
+              ? "border-secondary w-full"
+              : "border-transparent w-8/12"
           }`}
         >
           <div className="w-1/12 flex items-center justify-center">
@@ -88,9 +90,9 @@ function Home() {
       </div>
       {/* Search Results */}
       <div
-        className={`container w-full ${
+        className={`px-4 sm:px-0 max-w-md sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl w-full ${
           focus || search ? "h-full" : "h-1/3"
-        } transition-all duration-300`}
+        }`}
       >
         {searchedTimestamps.length > 0 ? (
           <>

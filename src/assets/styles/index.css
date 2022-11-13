@@ -1,17 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap');
 @font-face {
   font-family: "Helvetica";
   src: url("../fonts/HelveticaNeueLTProMdEx.otf") format("opentype");
 }
-@font-face {
-  font-family: "Montserrat";
-  src: url("../fonts/Montserrat-VariableFont_wght.ttf") format("");
-}
 
 @layer base {
   html {
-    font-family: "Montserrat";
+    font-family: 'Montserrat', sans-serif;
   }
 }

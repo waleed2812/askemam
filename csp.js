@@ -10,6 +10,7 @@ const IMG_SRC = [
   "blob:",
   "filesystem:",
   "https://i.ytimg.com",
+  "https://yt3.ggpht.com"
 ];
 
 module.exports = {

@@ -7,7 +7,10 @@ module.exports = {
         xs: "320px",
       },
       backgroundImage: {
-        "banner-01": "linear-gradient(rgba(0,0,0, 0.6), rgba(0,0,0, 0.6)), url(/public/assets/banners/01.jpg)",
+        "banner": "linear-gradient(rgba(0,0,0, 0.6), rgba(0,0,0, 0.6)), url(https://yt3.ggpht.com/8VhxphtWMrD3_J8abpez8t4dQGOUU_mz19VyXt2Q3y_gLeGcjkePFxSjWWKg-y48zHMbGsDhowI=w2120-fcrop64=1,00000000ffffffff-k-c0xffffffff-no-nd-rj)",
+      },
+      borderWidth: {
+        "1": "1px"
       },
       colors: {
         primary: "#3688E5",
