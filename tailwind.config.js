@@ -19,7 +19,8 @@ module.exports = {
         error: "#F51B01",
         black: "#020D1B",
         white: '#DDDDDD',
-        red: "#FF0000"
+        red: "#FF0000",
+        hover: "rgba(0,0,0,0.3)"
       },
       height: {
         "2/3vh": "calc(100vh - 33.33333vh)",
