@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import {
+  AiFillPauseCircle,
+  AiFillPlayCircle,
   AiFillYoutube,
   AiOutlineClose,
-  AiFillPlayCircle,
-  AiFillPauseCircle,
 } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { useContextController } from "../context";
@@ -16,6 +16,7 @@ interface IResultItem {
   t?: number;
   hms?: string;
   text?: string;
+  title?: string;
 }
 
 export const ResultItem: React.FC<IResultItem> = ({
@@ -26,6 +27,7 @@ export const ResultItem: React.FC<IResultItem> = ({
   t,
   hms,
   text,
+  title,
 }) => {
   const [{ darkMode }] = useContextController();
   const href = `https://youtu.be/${v}?t=${t}`;
@@ -48,6 +50,10 @@ export const ResultItem: React.FC<IResultItem> = ({
             // rel="noreferrer"
             // href={href}
             // target="_blank"
+            style={{
+              backgroundImage: `https://i.ytimg.com/vi/${v}/hqdefault.jpg`,
+              
+            }}
             className="absolute top-0 left-0 w-full h-full text-center bg-hover"
             onClick={() => setPlaying((isPlaying) => !isPlaying)}
           >
@@ -64,7 +70,7 @@ export const ResultItem: React.FC<IResultItem> = ({
               e.currentTarget.onerror = null;
             }}
             alt={"Video Cover"}
-            className={"object-cover aspect-video"}
+            className={"object-cover aspect-video h-full"}
           />
         </div>
 
@@ -80,6 +86,17 @@ export const ResultItem: React.FC<IResultItem> = ({
             </a>
             - {text}
           </p>
+          <div className="text-sm mb-2 md:text-base capitalize overflow-hidden text-ellipsis whitespace-nowrap	">
+            <span className="font-bold">Lecture: </span>
+            <a
+              rel="noreferrer"
+              href={hrefComplete}
+              target="_blank"
+              className="text-primary underline"
+            >
+              {title}
+            </a>
+          </div>
           <div className="flex flex-col sm:flex-row">
             <button
               onClick={(e) => {
@@ -91,26 +108,15 @@ export const ResultItem: React.FC<IResultItem> = ({
             >
               Copy Link
             </button>
-            <a
-              rel="noreferrer"
-              href={hrefComplete}
-              target="_blank"
-              className="transition-all duration-500 ease-in-out hover:scale-110 mb-2 sm:mb-0 py-1 px-3 bg-red rounded text-white text-sm md:text-base mr-2 sm:mr-4 border-2 border-red flex items-center justify-center"
-            >
-              <AiFillYoutube className="mr-1 text-sm md:text-lg" />
-              Play Lecture
-            </a>
             <button
               onClick={(e) => {
                 e?.preventDefault();
                 navigator.clipboard.writeText(hrefComplete);
                 toast("Link Copied.", { progressStyle: { background: "red" } });
               }}
-              className={`transition-all duration-500 ease-in-out hover:scale-110 mb-2 sm:mb-0 py-1 px-3 ${
-                darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
-              } rounded text-white text-sm md:text-base mr-2 sm:mr-4 border-2 border-red flex items-center justify-center`}
+              className={`transition-all duration-500 ease-in-out hover:scale-110 mb-2 sm:mb-0 py-1 px-3 bg-red text-white rounded text-white text-sm md:text-base mr-2 sm:mr-4 border-2 border-red flex items-center justify-center`}
             >
-              <AiFillYoutube className="mr-1 text-sm md:text-lg text-red" />
+              <AiFillYoutube className="mr-1 text-sm md:text-lg" />
               Copy Lecture Link
             </button>
           </div>

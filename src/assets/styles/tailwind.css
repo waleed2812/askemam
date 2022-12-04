@@ -613,24 +613,12 @@ html {
   left: 0px;
 }
 
-.right-0 {
-  right: 0px;
-}
-
-.bottom-0 {
-  bottom: 0px;
-}
-
 .top-1 {
   top: 0.25rem;
 }
 
 .right-1 {
   right: 0.25rem;
-}
-
-.ml-1 {
-  margin-left: 0.25rem;
 }
 
 .mb-4 {
@@ -643,6 +631,18 @@ html {
 
 .mr-1 {
   margin-right: 0.25rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
 }
 
 .mr-2 {
@@ -663,14 +663,6 @@ html {
 
 .mt-20 {
   margin-top: 5rem;
-}
-
-.ml-auto {
-  margin-left: auto;
-}
-
-.mr-auto {
-  margin-right: auto;
 }
 
 .flex {
@@ -705,6 +697,10 @@ html {
   height: 33.333333%;
 }
 
+.h-0 {
+  height: 0px;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -725,13 +721,12 @@ html {
   width: 91.666667%;
 }
 
-.w-max {
-  width: -webkit-max-content;
-  width: max-content;
-}
-
 .max-w-md {
   max-width: 28rem;
+}
+
+.max-w-full {
+  max-width: 100%;
 }
 
 @-webkit-keyframes spin {
@@ -779,6 +774,14 @@ html {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 .rounded-md {
@@ -849,6 +852,10 @@ html {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
+.bg-hover {
+  background-color: rgba(0,0,0,0.3);
+}
+
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(54 136 229 / var(--tw-bg-opacity));
@@ -873,10 +880,6 @@ html {
   background-color: transparent;
 }
 
-.bg-hover {
-  background-color: rgba(0,0,0,0.3);
-}
-
 .bg-banner {
   background-image: linear-gradient(rgba(0,0,0, 0.6), rgba(0,0,0, 0.6)), url(https://yt3.ggpht.com/8VhxphtWMrD3_J8abpez8t4dQGOUU_mz19VyXt2Q3y_gLeGcjkePFxSjWWKg-y48zHMbGsDhowI=w2120-fcrop64=1,00000000ffffffff-k-c0xffffffff-no-nd-rj);
 }
@@ -885,8 +888,16 @@ html {
   background-size: cover;
 }
 
+.bg-contain {
+  background-size: contain;
+}
+
 .bg-center {
   background-position: center;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
 }
 
 .object-cover {
@@ -932,11 +943,6 @@ html {
   padding-bottom: 0.75rem;
 }
 
-.py-20 {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
 .pb-5 {
   padding-bottom: 1.25rem;
 }
@@ -974,18 +980,22 @@ html {
   line-height: 1.75rem;
 }
 
-.capitalize {
-  text-transform: capitalize;
+.font-bold {
+  font-weight: 700;
 }
 
-.text-primary {
-  --tw-text-opacity: 1;
-  color: rgb(54 136 229 / var(--tw-text-opacity));
+.capitalize {
+  text-transform: capitalize;
 }
 
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(221 221 221 / var(--tw-text-opacity));
+}
+
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(54 136 229 / var(--tw-text-opacity));
 }
 
 .text-black {
