@@ -6,35 +6,22 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 import { toast } from "react-toastify";
+import { secondsToHMS } from "utils/reformers";
 import { useContextController } from "../context";
 
 interface IResultItem {
   v?: string;
-  lc?: string;
-  list?: string;
-  index?: number;
   t?: number;
-  hms?: string;
   text?: string;
   title?: string;
 }
 
-export const ResultItem: React.FC<IResultItem> = ({
-  v,
-  lc,
-  list,
-  index,
-  t,
-  hms,
-  text,
-  title,
-}) => {
+export const ResultItem: React.FC<IResultItem> = ({ v, t, text, title }) => {
   const [{ darkMode }] = useContextController();
-  const href = `https://youtu.be/${v}?t=${t}`;
+  const hrefComplete = `https://youtu.be/${v}`;
+  const href = `${hrefComplete}?t=${t}`;
   const embed = `https://youtube.com/embed/${v}?start=${t}&autoplay=1&rel=0`;
-  const hrefComplete = `https://youtube.com/watch?v=${v}&lc=${lc}${
-    list ? `&list=${list}&index=${index}` : ``
-  }&t=${t}`;
+  const hms = secondsToHMS(t);
 
   const [isPlaying, setPlaying] = useState(false);
 
@@ -52,7 +39,6 @@ export const ResultItem: React.FC<IResultItem> = ({
             // target="_blank"
             style={{
               backgroundImage: `https://i.ytimg.com/vi/${v}/hqdefault.jpg`,
-              
             }}
             className="absolute top-0 left-0 w-full h-full text-center bg-hover"
             onClick={() => setPlaying((isPlaying) => !isPlaying)}
